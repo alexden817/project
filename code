@@ -1,0 +1,32 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv('fail.csv')
+df.info()
+female_free = 0 
+female_standart = 0
+
+def lunch_counter(row):
+    global female_free, female_standart
+    if row['gender'] == 'female' and row['lunch'] == 'standart':
+        female_standart+=1
+    if row['gender'] == 'female' and row['lunch'] == 'free/reduced':
+        female_free+=1
+    return False 
+
+df.apply(lunch_counter, axis = 1)
+print('Кол-во девушек имеющих бесплатный обед:',female_free)
+print('Кол-во девушек имеющих стандартный обед:',female_standart)
+
+men_free = 0
+men_standart = 0 
+
+def lunch_counter2(row):
+    global men_free, men_standart
+    if row['gender'] == 'male' and row['lunch'] == 'standart':
+        male_standart+=1
+    if row['gender'] == 'male' and row['lunch'] == 'free/reduced':
+        men_free+=1
+    return False
+df.apply(lunch_counter2, axis = 1)
+print('Кол-во мужчин имеющих бесплатный обед:',men_free)
+print('Кол-во мужчин имеющих стандартный обед:',men_standart)
